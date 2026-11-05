@@ -1,15 +1,50 @@
-# 🛍️ Venta de Garage Web
+# 🗃️ Venta de Garage Web – Base de Datos (SQL Server)
 
-## 🗃️ Descripción del Sistema que utilizará la DB
+Diseño e implementación de la base de datos de una plataforma de venta de artículos usados con **sistema de reservas**: el comprador paga una seña del 10 % y el artículo queda reservado por 72 horas. Si la venta no se concreta en ese plazo, el artículo vuelve automáticamente a estar disponible.
 
-### ℹ️ Explicación del Sistema:
-El sistema propuesto consiste en una base de datos para gestionar la venta de artículos usados a través de una plataforma web personal 🌐. El objetivo es resolver la necesidad de un administrador (el vendedor) 👨‍💼 de publicar artículos, y de los potenciales compradores 🧑‍💻 de buscar, reservar y comprar 🛒 dichos artículos de una manera ordenada y segura.
-La principal característica del sistema es su mecanismo de reserva. Un comprador interesado puede reservar un artículo mediante el pago de una seña 💳 equivalente al 10% de su valor. Esta reserva asegura el artículo por 72 horas ⏳, pasándolo a un estado "Reservado" e impidiendo que otros lo compren. Si el comprador no completa la transacción en ese plazo, la seña no se devuelve y el artículo vuelve a estar "Disponible" automáticamente.
+> Trabajo Práctico Integrador de **Base de Datos II** de la Tecnicatura Universitaria en Programación (UTN), desarrollado por el **Grupo 50**.
 
-### 🚀 Funcionalidades Principales:
+## 🧩 Modelo de datos
 
- * 🏷️ Gestión de Artículos: El administrador podrá publicar nuevos artículos, asignándoles un nombre, descripción, precio y categoría. También podrá modificar sus datos o eliminarlos del listado.
- * 👤 Gestión de Usuarios: El sistema registrará a los potenciales compradores, almacenando sus datos básicos para gestionar las reservas y ventas.
- * ⏳ Sistema de Reservas: Los usuarios podrán reservar un artículo. El sistema registrará la reserva, calculará el monto de la seña, y establecerá una fecha de vencimiento de 72 horas.
- * 💸 Proceso de Venta: Permite concretar la venta de un artículo previamente reservado, registrando el pago final y cambiando el estado del artículo a "Vendido".
- * 📊 Consultas y Reportes: Tanto el administrador como los usuarios (con distintos niveles de acceso) podrán consultar información clave, como el listado de artículos disponibles, el historial de ventas o las reservas activas.
+Tablas: `Usuarios`, `Articulos`, `Categorias`, `EstadosArticulo`, `ImagenesArticulo`, `Reservas`, `Ventas`, `Auditoria`
+
+## ⚙️ Objetos de base de datos
+
+| Tipo | Objeto | Qué hace |
+|---|---|---|
+| Stored Procedure | `SP_RegistrarReserva` | Registra una reserva con su seña y vencimiento |
+| Stored Procedure | `SP_ReporteDeVentasPorFechas` | Reporte de ventas en un rango de fechas |
+| Trigger | `TR_RestaurarDisponibilidadPorVentaFallida` | Vuelve a dejar disponible el artículo si la venta no se concreta |
+| Trigger | `TR_NotificarCambioDePrecio` | Registra en `Auditoria` los cambios de precio |
+| Trigger | `TR_AuditarArticuloPublicado` | Audita la publicación de nuevos artículos |
+| Vista | `VW_ReservasActivas` | Reservas vigentes con su tiempo restante |
+| Vista | `VW_ArticulosDisponibles` | Artículos disponibles para la venta |
+| Vista | `VW_HistorialVentas` | Historial consolidado de ventas |
+| Función | `CalcularTiempoRestante` | Calcula el tiempo restante de una reserva |
+
+## 📁 Estructura
+
+```
+├── Creacion de DB/  → Creación de tablas y relaciones
+├── INSERT/          → Datos de prueba
+├── SP/              → Stored procedures
+├── TRIGGERS/        → Triggers
+└── VISTAS/          → Vistas y funciones
+```
+
+## 🛠️ Tecnologías
+
+SQL Server · T-SQL
+
+## 👨‍💻 Mi aporte
+
+- Escribí el script de creación de las tablas **Articulos**, **ImagenesArticulo** y **Auditoria**.
+- Desarrollé el **trigger** que restaura la disponibilidad, la **función** que calcula el tiempo restante de una reserva y la **vista** de reservas activas.
+
+## ▶️ Cómo ejecutarlo
+
+Ejecutar los scripts en SQL Server Management Studio en este orden: `Creacion de DB` → `INSERT` → `SP` → `TRIGGERS` → `VISTAS`.
+
+## 👥 Equipo
+
+[Marisel Alarcón](https://github.com/AlarconMarisel) · [Claudio Gobbi](https://github.com/ClaudioCesarGobbi) · [Lautaro Figueroa](https://github.com/Lautaro-Figueroa)
