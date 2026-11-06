@@ -8,6 +8,8 @@ Diseño e implementación de la base de datos de una plataforma de venta de art�
 
 Tablas: `Usuarios`, `Articulos`, `Categorias`, `EstadosArticulo`, `ImagenesArticulo`, `Reservas`, `Ventas`, `Auditoria`
 
+![Diagrama del modelo de datos en SQL Server: tablas con claves primarias y relaciones](docs/diagrama-modelo.png)
+
 ## ⚙️ Objetos de base de datos
 
 | Tipo | Objeto | Qué hace |
@@ -21,6 +23,10 @@ Tablas: `Usuarios`, `Articulos`, `Categorias`, `EstadosArticulo`, `ImagenesArtic
 | Vista | `VW_ArticulosDisponibles` | Artículos disponibles para la venta |
 | Vista | `VW_HistorialVentas` | Historial consolidado de ventas |
 | Función | `CalcularTiempoRestante` | Calcula el tiempo restante de una reserva |
+
+Vistas, stored procedures y funciones en SQL Server Management Studio, con el resultado de `VW_ArticulosDisponibles`:
+
+![SSMS: vistas, stored procedures y la función CalcularTiempoRestante, con el resultado de la vista VW_ArticulosDisponibles](docs/ssms-objetos-y-vista.png)
 
 ## 📁 Estructura
 
